@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembuat Pengulang Text</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f3f4f6;
+        }
+        #backgroundCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+        }
+        .container {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            font-size: 1.5rem;
+            color: #333333;
+            margin-bottom: 20px;
+        }
+        label {
+            font-size: 0.9rem;
+            color: #555555;
+            margin-top: 10px;
+            display: block;
+        }
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #dddddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px 5px;
+            font-size: 1rem;
+            color: #ffffff;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 1rem;
+            color: #333;
+            background-color: #f9f9f9;
+            padding: 15px;
+            border: 1px solid #dddddd;
+            border-radius: 4px;
+            white-space: pre-line;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Canvas untuk latar belakang geometris -->
+    <canvas id="backgroundCanvas"></canvas>
+
+    <!-- Konten utama -->
+    <div class="container">
+        <h1>Pembuat Pengulang Text</h1>
+        <p>Created By <a href="https://instagram.com/fakhriigt">@RiiCODE</a></p>
+
+        <label for="text">Masukan Text Yang Mau Di Buat:</label>
+        <input type="text" id="text" placeholder="Masukan Text...">
+
+        <label for="count">Masukan Jumlah Yang Akan Di Buat:</label>
+        <input type="number" id="count" min="1" placeholder="Masukan Jumlah...">
+
+        <button onclick="repeatText()">Buat Text</button>
+        <button onclick="copyText()">Salin Text</button>
+
+        <div id="result"></div>
+    </div>
+
+    <!-- Audio yang berjalan di background -->
+    <audio autoplay loop>
+        <source src="https://riistorez.github.io/audio/songs.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag.
+    </audio>
+
+    <script>
+        function repeatText() {
+            const text = document.getElementById('text').value;
+            const count = parseInt(document.getElementById('count').value);
+            let result = '';
+
+            if (isNaN(count) || count < 1) {
+                result = "Please enter a valid repeat count.";
+            } else {
+                for (let i = 0; i < count; i++) {
+                    result += text + '\n';
+                }
+            }
+
+            document.getElementById('result').innerText = result;
+        }
+
+        function copyText() {
+            const result = document.getElementById('result').innerText;
+
+            const tempTextarea = document.createElement("textarea");
+            tempTextarea.value = result;
+            document.body.appendChild(tempTextarea);
+
+            tempTextarea.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempTextarea);
+
+            alert("Text copied to clipboard!");
+        }
+
+        // JavaScript untuk latar belakang geometris ungu bercahaya
+        const canvas = document.getElementById('backgroundCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Ukuran canvas sesuai dengan jendela
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Membuat titik-titik yang bergerak
+        const dots = [];
+        for (let i = 0; i < 100; i++) {
+            dots.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 2 + 1,
+                xDirection: Math.random() > 0.5 ? 1 : -1,
+                yDirection: Math.random() > 0.5 ? 1 : -1,
+                speed: Math.random() * 0.5 + 0.2
+            });
+        }
+
+        function animateDots() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            dots.forEach(dot => {
+                dot.x += dot.speed * dot.xDirection;
+                dot.y += dot.speed * dot.yDirection;
+
+                if (dot.x > canvas.width || dot.x < 0) dot.xDirection *= -1;
+                if (dot.y > canvas.height || dot.y < 0) dot.yDirection *= -1;
+
+                ctx.beginPath();
+                ctx.arc(dot.x, dot.y, dot.radius, 0, Math.PI * 2);
+
+                // Warna ungu bercahaya
+                const gradient = ctx.createRadialGradient(dot.x, dot.y, 0, dot.x, dot.y, dot.radius * 4);
+                gradient.addColorStop(0, 'rgba(128, 0, 128, 1)');     // Ungu solid di tengah
+                gradient.addColorStop(1, 'rgba(128, 0, 128, 0)');     // Transparan di pinggir
+
+                ctx.fillStyle = gradient;
+                ctx.fill();
+            });
+
+            requestAnimationFrame(animateDots);
+        }
+
+        animateDots();
+
+        // Menyesuaikan ukuran canvas saat jendela diubah
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+
+</body>
+</html>
