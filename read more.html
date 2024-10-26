@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembuat Teks Read More</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            max-width: 600px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        textarea {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .more {
+            display: none;
+            color: #555;
+        }
+        .read-more {
+            color: blue;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        #output {
+            margin-top: 20px;
+            border: 1px solid #007bff;
+            border-radius: 5px;
+            padding: 15px;
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Pembuat Teks Read More</h1>
+    
+    <label for="startText">Teks Awal:</label><br>
+    <textarea id="startText" rows="2" placeholder="Masukkan teks awal di sini..."></textarea>
+    
+    <label for="endText">Teks Akhir:</label><br>
+    <textarea id="endText" rows="2" placeholder="Masukkan teks akhir di sini..."></textarea>
+
+    <button onclick="generateText()">Buat Teks</button>
+    <button onclick="copyText()">Salin</button>
+    
+    <div id="output"></div>
+
+    <script>
+        function generateText() {
+            const startText = document.getElementById('startText').value;
+            const endText = document.getElementById('endText').value;
+
+            const outputDiv = document.getElementById('output');
+
+            // Mengatur output HTML
+            outputDiv.innerHTML = `
+                <p>
+                    ${startText} 
+                    <span class="read-more" onclick="toggleReadMore(this)">Read More</span>
+                    <span class="more">${endText}</span>
+                </p>
+            `;
+
+            // Menampilkan hasil secara default sebagai tersembunyi
+            outputDiv.querySelector('.more').style.display = 'none';
+        }
+
+        function toggleReadMore(element) {
+            const moreText = element.nextElementSibling;
+            
+            if (moreText.style.display === 'none' || moreText.style.display === '') {
+                moreText.style.display = 'inline';
+                element.textContent = 'Read Less';
+            } else {
+                moreText.style.display = 'none';
+                element.textContent = 'Read More';
+            }
+        }
+
+        function copyText() {
+            const outputDiv = document.getElementById('output');
+            const textToCopy = outputDiv.innerText;
+
+            if (textToCopy) {
+                navigator.clipboard.writeText(textToCopy)
+                    .then(() => {
+                        alert('Teks telah disalin ke clipboard!');
+                    })
+                    .catch(err => {
+                        console.error('Gagal menyalin: ', err);
+                    });
+            } else {
+                alert('Tidak ada teks untuk disalin.');
+            }
+        }
+    </script>
+
+</body>
+</html>
