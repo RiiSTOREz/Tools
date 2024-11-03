@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript Obfuscator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 50px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        textarea {
+            width: 80%;
+            margin: 10px;
+            padding: 15px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            resize: vertical;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+        .output-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>JavaScript Obfuscator</h1>
+        <p>Masukkan kode JavaScript di bawah ini untuk di-obfuscate / encrypt:</p>
+
+        <textarea id="inputCode" rows="8" placeholder="Masukkan kode JavaScript Anda di sini..."></textarea>
+        <button onclick="obfuscateCode()">Obfuscate</button>
+
+        <div class="output-section">
+            <h3>Kode yang Di-Obfuscate:</h3>
+            <textarea id="outputCode" rows="8" readonly placeholder="Hasil obfuscation akan muncul di sini..."></textarea>
+            <button onclick="copyToClipboard()">Salin Code</button>
+        </div>
+    </div>
+
+    <script>
+        function obfuscateCode() {
+            const inputCode = document.getElementById("inputCode").value;
+
+            if (!inputCode) {
+                alert("Masukkan kode JavaScript terlebih dahulu.");
+                return;
+            }
+
+            // Encode ke Base64
+            const encodedCode = btoa(unescape(encodeURIComponent(inputCode)));
+
+            // Buat kode JavaScript yang bisa di-decode saat runtime
+            const obfuscatedCode = `<script>
+                (function() {
+                    const decodedCode = decodeURIComponent(escape(atob("${encodedCode}")));
+                    eval(decodedCode);
+                })();
+            <\/script>`;
+
+            // Tampilkan hasil obfuscation
+            document.getElementById("outputCode").value = obfuscatedCode;
+        }
+
+        function copyToClipboard() {
+            const outputCode = document.getElementById("outputCode");
+            outputCode.select();
+            outputCode.setSelectionRange(0, 99999); // Untuk perangkat mobile
+            document.execCommand("copy");
+
+            alert("Kode berhasil disalin ke clipboard!");
+        }
+    </script>
+
+</body>
+</html>
