@@ -1,4 +1,6 @@
 #!bin/bash
+
+echo ""
 animate_text "Halo Kaum Gamon / Sad"
 echo ""
 animate_text "Seperti Nya Anda Sangat Memikirkan Dia Dengan Yang Lain Ya? "
