@@ -5,7 +5,7 @@ animate_text() {
     local text=$1
     for ((i=0; i<${#text}; i++)); do
         printf "%s" "${text:$i:1}"
-        sleep 0.02
+        sleep 0.10
     done
     echo ""
 }
