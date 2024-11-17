@@ -1,5 +1,14 @@
 #!bin/bash
 
+# Fungsi untuk menampilkan teks animasi
+animate_text() {
+    local text=$1
+    for ((i=0; i<${#text}; i++)); do
+        printf "%s" "${text:$i:1}"
+        sleep 0.05
+    done
+    echo ""
+}
 animate_text "Halo Kaum Gamon / Sad"
 animate_text "Seperti Nya Anda Sangat Memikirkan Dia Dengan Yang Lain Ya? "
 animate_text "Saya Ada Kata Kata Hari Ini"
