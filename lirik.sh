@@ -17,8 +17,8 @@ echo -e "${BLUE}[+]                                               [+]${NC}"
 echo -e "${BLUE}[+]===============================================[+]${NC}"
 echo ""
 echo -e "${BLUE}[+]===============================================[+]${NC}"
-animate_text "Berikut Daftar Lirik Lagu Yang Tersedia :
-echo "1. MASING MASING ( Ernie Zakri )
+echo -e "Berikut Daftar Lirik Lagu Yang Tersedia :"
+echo "1. MASING MASING ( Ernie Zakri )"
 echo -e "${BLUE}[+]===============================================[+]${NC}"
 read -p "[+] PILIH LIRIK LAGU (1): " OPTION
 echo -e "${BLUE}[+]===============================================[+]${NC}"
