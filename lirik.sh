@@ -21,7 +21,6 @@ echo -e "Berikut Daftar Lirik Lagu Yang Tersedia :"
 echo "1. MASING MASING ( Ernie Zakri )"
 echo -e "${BLUE}[+]===============================================[+]${NC}"
 read -p "[+] PILIH LIRIK LAGU (1): " OPTION
-read -e "${BLUE}[+]===============================================[+]${NC}"
 case "$OPTION" in
      1)
       animate_text " wwwwwwwwwwwwwwwwwwwwwww"
