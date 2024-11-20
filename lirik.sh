@@ -25,3 +25,5 @@ echo -e "${BLUE}[+]===============================================[+]${NC}"
 case "$OPTION" in
      1)
       animate_text " wwwwwwwwwwwwwwwwwwwwwww"
+       exit 0
+       ;;
