@@ -5,7 +5,7 @@ animate_text() {
     local text=$1
     for ((i=0; i<${#text}; i++)); do
         printf "%s" "${text:$i:1}"
-        sleep 0.10
+        sleep 0.07
     done
     echo ""
 }
@@ -22,7 +22,8 @@ animate_text "- Dunia Sesibuk Itu Ya? Sampe Kita Di Asingkan"
 animate_text "- nyatanya dimanapun aku berada , perananku untuk melindungimu selalu gagal. "
 animate_text "- andai dia tau aku rela ga marah dan mengesampingkan sakit hatiku, supaya kita tetap baik-baik saja."
 animate_text "- aku ga sesempurna kaya orang orang, tapi aku tau rasanya cukup dengan satu orang."
+animate-text "- Lebih Baik Terjebak Hujan , Dari Pada Terjebak Rasa Nyaman Namun Hanya Sebatas Teman."
 echo ""
-animate_text "Mungkin Segitu Saja Dulu Kata Kata Hari Ini Moga yang lagi sedih beli golda tengah malam di indomart dengan duduk di kursi :') "
+animate_text "Mungkin Segitu Saja Dulu Kata Kata Hari Ini , Moga yang lagi sedih silahkan beli golda di indomart dan duduk di kursi Tanpa Bercerita :') "
  exit
   ;;
