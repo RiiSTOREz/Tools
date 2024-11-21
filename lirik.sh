@@ -30,7 +30,7 @@ read -p "[+] PILIH LIRIK LAGU (1): " OPTION
 # Pilihan menu
 case "$OPTION" in
     1)
-        echo "MASING MASING BY ERNIE ZAKRIE & ADE GOVINDA
+        echo "MASING MASING BY ERNIE ZAKRIE & ADE GOVINDA"
         echo "Lyrics Running....."
         animate_text "Tapi Akuu..... Letih Jugaa..."
         animate_text "Lebih Baik.... Kita.. Masing - Masing.."
