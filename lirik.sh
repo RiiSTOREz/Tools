@@ -24,7 +24,5 @@ read -p "[+] PILIH LIRIK LAGU (1): " OPTION
 case "$OPTION" in
      1)
       animate_text " wwwwwwwwwwwwwwwwwwwwwww"
-       exit 0
+       fi
        ;;
-exit
-;;
