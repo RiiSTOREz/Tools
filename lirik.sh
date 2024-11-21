@@ -26,3 +26,5 @@ case "$OPTION" in
       animate_text " wwwwwwwwwwwwwwwwwwwwwww"
        exit 0
        ;;
+exit
+;;
