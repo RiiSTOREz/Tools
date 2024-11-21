@@ -22,15 +22,18 @@ echo -e "${BLUE}[+]                                               [+]${NC}"
 echo -e "${BLUE}[+]===============================================[+]${NC}"
 echo ""
 echo -e "${BLUE}[+]===============================================[+]${NC}"
-echo -e "Berikut Daftar Lirik Lagu Yang Tersedia :"
-echo "1. MASING MASING ( Ernie Zakri )"
+echo -e "[+] Berikut Daftar Lirik Lagu Yang Tersedia :"
+echo "[+] 1. MASING MASING ( Ernie Zakri )"
 echo -e "${BLUE}[+]===============================================[+]${NC}"
 read -p "[+] PILIH LIRIK LAGU (1): " OPTION
 
 # Pilihan menu
 case "$OPTION" in
     1)
-        animate_text "Lirik lagu MASING MASING sedang ditampilkan..."
+        echo "MASING MASING BY ERNIE ZAKRIE & ADE GOVINDA
+        echo "Lyrics Running....."
+        animate_text "Tapi Akuu..... Letih Jugaa..."
+        animate_text "Lebih Baik.... Kita.. Masing - Masing.."
         ;;
     *)
         echo "Pilihan tidak valid!"
